@@ -26,6 +26,7 @@ RUN pip install -r requirements.txt						8
 RUN python3 setup.py develop							9
 
 CMD ["python3", "inference_realesrgan.py","-n","RealESRGAN_x4plus","-i","inputs_local","-o","inputs_local","-t", "800", "--fp32"]			10
+
 ---
 
 1.	 It determines the base image layer. The base image is Python 3.9
@@ -58,21 +59,22 @@ If the inference on Real-ESRGAN application is wanted to do, the image can be pu
 Bash infer.sh C:/Users/…. (Git bash)
 
 ---
-** infer.sh **
+**infer.sh**
 
  #!/bin/sh
 docker pull beerce/real_esrgan:v1							1
 docker run --rm -d -it --platform linux/amd64 --name cont-realesrgan  --mount type=bind,src=$1,target=/Real-ESRGAN/inputs_local beerce/real_esrgan:v1		2
+
 ---
 
 1.	Pulling the docker image from the Docker Hub
 2.	Running the container 
-*Tabspace* •	--rm: provides removing the container after running
-*Tabspace* •	--name: specifies the container name. In this situation name is cont-realesrgan
-*Tabspace* •	--platform linux/amd64: the image OS is Linux and the architecture is amd64. To run this image in another OS this command can be used.
-*Tabspace* •	--mount type: bind: bind mount option
-*Tabspace* •	src: source path of the mounting. $1 represents the input given when the sh file is run.
-*Tabspace* •	target: target path in the container.
+nbsp •	--rm: provides removing the container after running <br/>
+nbsp •	--name: specifies the container name. In this situation name is cont-realesrgan <br/>
+nbsp •	--platform linux/amd64: the image OS is Linux and the architecture is amd64. To run this image in another OS this command can be used.<br/>
+nbsp •	--mount type: bind: bind mount option<br/>
+nbsp •	src: source path of the mounting. $1 represents the input given when the sh file is run.<br/>
+nbsp •	target: target path in the container.<br/>
 
 ### Example Result
 ![image](https://user-images.githubusercontent.com/66211576/215257224-a987e244-97fb-4a6c-9c10-dbe747e11548.png)
