@@ -9,11 +9,13 @@ The main goal of this project is to make inferences on the images by containeriz
 Docker Desktop: 4.15.0
 ### 2.	Dockerfile Creation:
 
----
 **Dockerfile**
-FROM python:3.9								1
 
-RUN apt-get update && apt-get install -y git					2
+```bash
+
+FROM python:3.9								                                    1
+
+RUN apt-get update && apt-get install -y git					          2
 RUN git clone https://github.com/xinntao/Real-ESRGAN.git			3	
 
 WORKDIR /Real-ESRGAN							4
@@ -58,14 +60,14 @@ If the inference on Real-ESRGAN application is wanted to do, the image can be pu
 ./infer.sh C:/Users/… (PowerShell)
 Bash infer.sh C:/Users/…. (Git bash)
 
----
-**infer.sh**
+
+```bash
 
  #!/bin/sh
 docker pull beerce/real_esrgan:v1							1
 docker run --rm -d -it --platform linux/amd64 --name cont-realesrgan  --mount type=bind,src=$1,target=/Real-ESRGAN/inputs_local beerce/real_esrgan:v1		2
 
----
+```
 
 1.	Pulling the docker image from the Docker Hub
 2.	Running the container 
