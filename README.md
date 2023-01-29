@@ -13,25 +13,25 @@ Docker Desktop: 4.15.0
 ---
 
 
-FROM python:3.9								**1**
+FROM python:3.9								**---1**
 
-RUN apt-get update && apt-get install -y git					**2**
+RUN apt-get update && apt-get install -y git					**---2**
 
-RUN git clone https://github.com/xinntao/Real-ESRGAN.git			**3**	
+RUN git clone https://github.com/xinntao/Real-ESRGAN.git			**---3**	
 
-WORKDIR /Real-ESRGAN							**4**
+WORKDIR /Real-ESRGAN							**---4**
 
-RUN mkdir /Real-ESRGAN/inputs_local						**5**
+RUN mkdir /Real-ESRGAN/inputs_local						**---5**
 
-RUN apt-get update && apt-get install ffmpeg libsm6 libxext6  -y		**6**
+RUN apt-get update && apt-get install ffmpeg libsm6 libxext6  -y		**---6**
 
-RUN pip install --upgrade pip							**7**	
+RUN pip install --upgrade pip							**---7**	
 
-RUN pip install -r requirements.txt					**8**
+RUN pip install -r requirements.txt					**---8**
 
-RUN python3 setup.py develop							**9**
+RUN python3 setup.py develop							**---9**
 
-CMD ["python3", "inference_realesrgan.py","-n","RealESRGAN_x4plus","-i","inputs_local","-o","inputs_local","-t", "800", "--fp32"]			**10**
+CMD ["python3", "inference_realesrgan.py","-n","RealESRGAN_x4plus","-i","inputs_local","-o","inputs_local","-t", "800", "--fp32"]			**---10**
 
 ---
 
@@ -73,9 +73,9 @@ If the inference on Real-ESRGAN application is wanted to do, the image can be pu
 
 
  #!/bin/sh
-docker pull beerce/real_esrgan:v1							**1**
+docker pull beerce/real_esrgan:v1							**---1**
 
-docker run --rm -d -it --platform linux/amd64 --name cont-realesrgan  --mount type=bind,src=$1,target=/Real-ESRGAN/inputs_local beerce/real_esrgan:v1		**2**
+docker run --rm -d -it --platform linux/amd64 --name cont-realesrgan  --mount type=bind,src=$1,target=/Real-ESRGAN/inputs_local beerce/real_esrgan:v1		**---2**
 
 ---
 
