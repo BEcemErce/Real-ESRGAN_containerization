@@ -8,8 +8,9 @@ The main goal of this project is to make inferences on the images by containeriz
 ### 1.	Setup:
 Docker Desktop: 4.15.0
 ### 2.	Dockerfile Creation:
----
+
 **Dockerfile**
+---
 
 
 FROM python:3.9								**1**
@@ -53,19 +54,22 @@ CMD ["python3", "inference_realesrgan.py","-n","RealESRGAN_x4plus","-i","inputs_
 
 ### 3.	Docker Image Creation and Upload to Docker Hub:
 After forming this dockerfile, the docker image of real_esrgan:v1 was created by running the command below. <br/>
-&emsp; docker build -t real_esrgan:v1 . <br/>
+
+&emsp; **docker build -t real_esrgan:v1 . **<br/>
+
 In the Docker Hub, a repository was created named real_esrgan. The docker commands below were applied to push of the local docker image to Docker Hub. (cf76de880683 is image ID, beerce is username). If someone wants to create their own image in the hub, the username should be changed based on their own account. (url: https://hub.docker.com/repository/docker/beerce/real_esrgan/general)<br/>
 
-&emsp; docker tag cf76de880683 beerce/real_esrgan:v1 <br/>
-&emsp; docker push beerce/real_esrgan:v1 <br/>
+&emsp; **docker tag cf76de880683 beerce/real_esrgan:v1 **<br/>
+&emsp; **docker push beerce/real_esrgan:v1 **<br/>
 
 ### 4.	Inference file:
 If the inference on Real-ESRGAN application is wanted to do, the image can be pulled from the Docker Hub, and then the container can be run (if the docker image is not in the docker desktop). To do this, the sh file below can be run or just the commands in the file can be run in the terminal.<br/>
-&emsp; ./infer.sh C:/Users/… (PowerShell) <br/>
-&emsp; Bash infer.sh C:/Users/…. (Git bash)
+&emsp; **./infer.sh C:/Users/… (PowerShell)** <br/>
+&emsp;** Bash infer.sh C:/Users/…. (Git bash)**
 
----
 **infer.sh**
+---
+
 
  #!/bin/sh
 docker pull beerce/real_esrgan:v1							**1**
